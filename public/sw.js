@@ -1,6 +1,6 @@
 const preLoad = function () {
     return caches.open("offline").then(function (cache) {
-        // caching index and important routes
+        // caching index
         return cache.addAll(filesToCache);
     });
 };
