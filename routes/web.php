@@ -32,3 +32,7 @@ Route::prefix('user')->name('user.')->middleware('auth', 'verified')->group(func
 Route::get('internet-error', function(){
     return view('errors.internet');
 })->name('error.internet');
+
+Route('note-found', function(){
+    return view('errors.404');
+});
