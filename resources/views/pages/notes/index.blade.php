@@ -44,11 +44,11 @@
                                 </td>
 
                                 <td class="table-action text-center">
-                                    <a class="text-warning mx-2" href="{{ route('note.show', $note->id) }}">
+                                    <a class="text-warning mx-2" href="{{ route('user.note.show', $note->id) }}">
                                         <i class="align-middle" data-feather="eye"></i>
                                     </a>
 
-                                    <a class="text-info mx-2" href="{{ route('note.edit', $note->id) }}">
+                                    <a class="text-info mx-2" href="{{ route('user.note.edit', $note->id) }}">
                                         <i class="align-middle" data-feather="edit"></i>
                                     </a>
 
