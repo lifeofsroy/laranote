@@ -33,6 +33,6 @@ Route::get('internet-error', function(){
     return view('errors.internet');
 })->name('error.internet');
 
-Route('note-found', function(){
+Route::get('note-found', function(){
     return view('errors.404');
 });
