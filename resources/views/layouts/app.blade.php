@@ -15,8 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet">
 
     <meta name="theme-color" content="#6777ef">
-    <link rel="apple-touch-ion" href="{{asset('logo.png')}}">
-    <link rel="manifest" href="{{asset('manifest.json')}}">
+    <link href="{{ asset('logo.png') }}" rel="apple-touch-ion">
+    <link href="{{ asset('manifest.json') }}" rel="manifest">
 
     <link href="{{ asset('assets/user/css/light.css') }}" rel="stylesheet">
 
@@ -26,7 +26,7 @@
         }
     </style>
     @stack('style')
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 
@@ -58,12 +58,36 @@
     </div>
 
     <script src="{{ asset('assets/user/js/app.js') }}"></script>
-    <script src="{{asset('sw.js')}}"></script>
+    <script src="{{ asset('sw.js') }}"></script>
     <script>
         if (!navigator.serviceWorker.controller) {
             navigator.serviceWorker.register('/sw.js')
-            .then((reg)=>{
-                console.log(reg);
+                .then((reg) => {
+                    console.log(reg);
+                });
+        }
+    </script>
+    <script>
+        // notification
+        function notify(msz) {
+            let message = msz;
+            let type = 'success';
+            let duration = 2400;
+            let ripple = 1;
+            let dismissible = 1;
+            let positionX = 'right';
+            let positionY = 'top';
+
+            window.notyf.open({
+                type,
+                message,
+                duration,
+                ripple,
+                dismissible,
+                position: {
+                    x: positionX,
+                    y: positionY
+                }
             });
         }
     </script>

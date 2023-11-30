@@ -20,9 +20,14 @@
 
                             <div class="mb-3">
                                 <label class="form-label" for="title">Title</label>
-                                <input class="form-control" id="title" name='title' type="text" value="{{ old('title', $note->title) }}">
-
+                                <textarea class="form-control" id="title" name='title' rows="3">{{ old('title', $note->title) }}</textarea>
                                 <small class="text-danger" id="title_error"></small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="overview">Overview</label>
+                                <textarea class="form-control" id="overview" name='overview' rows="3">{{ old('overview', $note->overview) }}</textarea>
+                                <small class="text-danger" id="overview_error"></small>
                             </div>
 
                             <div class="mb-3">
@@ -30,7 +35,6 @@
                                 <textarea class="form-control" id="description" name="description" rows="10">
                                     {{ old('title', $note->description) }}
                                 </textarea>
-
                                 <small class="text-danger" id="description_error"></small>
                             </div>
 
@@ -51,6 +55,7 @@
             let editNoteForm = document.querySelector('#editNoteForm');
             let noteid = editNoteForm.querySelector('[name="noteid"]').value;
             let title = editNoteForm.querySelector('[name="title"]');
+            let overview = editNoteForm.querySelector('[name="overview"]');
             let description = editNoteForm.querySelector('[name="description"]');
             let title_error = editNoteForm.querySelector('#title_error');
             let description_error = editNoteForm.querySelector('#description_error');
@@ -58,10 +63,6 @@
 
             // ckeditor
             ClassicEditor.create(ckdesc)
-                .then(editor => {
-                    desc = editor.getData();
-
-                })
                 .catch(err => {
                     console.log(err);
                 })
@@ -77,11 +78,13 @@
                             'X-CSRF-TOKEN': csrf_token,
                         },
                         title: title.value,
+                        overview: overview.value,
                         description: description.value,
                     })
                     .then((res) => {
                         // console.log(res);
                         title_error.style.display = 'none';
+                        overview_error.style.display = 'none';
                         description_error.style.display = 'none';
 
                         notify(res.data.message);
@@ -96,40 +99,22 @@
                             err.response.data.errors.title == undefined ? title_error.style.display = 'none' : title_error.style
                                 .display =
                                 'block';
+
+                            err.response.data.errors.overview == undefined ? overview_error.style.display = 'none' : overview_error.style
+                                .display =
+                                'block';
+
                             err.response.data.errors.description == undefined ? description_error.style.display = 'none' :
                                 description_error.style
                                 .display =
                                 'block';
 
                             title_error.innerText = err.response.data.errors.title;
+                            overview_error.innerText = err.response.data.errors.overview;
                             description_error.innerText = err.response.data.errors.description;
                         }
                     })
             })
-
-            // notification
-            function notify(msz) {
-                let message = msz;
-                let type = 'success';
-                let duration = 2400;
-                let ripple = 1;
-                let dismissible = 1;
-                let positionX = 'right';
-                let positionY = 'top';
-
-                window.notyf.open({
-                    type,
-                    message,
-                    duration,
-                    ripple,
-                    dismissible,
-                    position: {
-                        x: positionX,
-                        y: positionY
-                    }
-                });
-            }
-
         })
     </script>
 @endpush

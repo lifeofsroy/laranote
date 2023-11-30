@@ -17,15 +17,16 @@
                     <div class="card" id="noteRow{{ $note->id }}">
                         <div class="card-header pb-1">
                             <a href="{{ route('user.note.show', $note->id) }}">
-                                <h4 class="card-title mb-0">{{ $note->title }}</h4>
+                                <h4 class="mb-0 text-secondary">{{ $note->title }}</h4>
                             </a>
                             <h6 class="text-info">{{ Carbon\Carbon::parse($note->updated_at)->diffForHumans() }}</h6>
                         </div>
                         <div class="card-body pt-0">
                             <p class="card-text">{{$note->overview}}</p>
                             <div class="mt-2">
-                                <a class="card-link" href="{{ route('user.note.edit', $note->id) }}">Edit</a>
-                                <a class="card-link" onclick="deleteNote({{ $note->id }})">Delete</a>
+                                <a class="card-link text-success" href="{{ route('user.note.show', $note->id) }}">Read</a>
+                                <a class="card-link text-warning" href="{{ route('user.note.edit', $note->id) }}">Edit</a>
+                                <a class="card-link text-danger" onclick="deleteNote({{ $note->id }})">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -39,29 +40,6 @@
 
 @push('script')
     <script>
-        // notification
-        function notify(msz) {
-            let message = msz;
-            let type = 'success';
-            let duration = 2400;
-            let ripple = 1;
-            let dismissible = 1;
-            let positionX = 'right';
-            let positionY = 'top';
-
-            window.notyf.open({
-                type,
-                message,
-                duration,
-                ripple,
-                dismissible,
-                position: {
-                    x: positionX,
-                    y: positionY
-                }
-            });
-        }
-
         // change status
         function changeStatus(id) {
             axios.get(`/user/note/status/${id}`)

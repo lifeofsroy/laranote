@@ -112,29 +112,6 @@
                     })
             })
 
-            // notification
-            function notify(msz) {
-                let message = msz;
-                let type = 'success';
-                let duration = 2400;
-                let ripple = 1;
-                let dismissible = 1;
-                let positionX = 'right';
-                let positionY = 'top';
-
-                window.notyf.open({
-                    type,
-                    message,
-                    duration,
-                    ripple,
-                    dismissible,
-                    position: {
-                        x: positionX,
-                        y: positionY
-                    }
-                });
-            }
-
         })
     </script>
 @endpush

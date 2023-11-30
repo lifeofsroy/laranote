@@ -24,8 +24,8 @@ class NoteController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            "title" => ['required'],
-            "overview" => ['required'],
+            "title" => ['required', 'max:100'],
+            "overview" => ['required', 'max:150'],
             "description" => ['required'],
         ]);
 
@@ -51,8 +51,8 @@ class NoteController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            "title" => ['required'],
-            "overview" => ['required'],
+            "title" => ['required', 'max:100'],
+            "overview" => ['required', 'max:150'],
             "description" => ['required'],
         ]);
 
