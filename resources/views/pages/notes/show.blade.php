@@ -3,7 +3,7 @@
     <main class="content">
         <div class="container-fluid p-0">
             <div class="row mb-xl-3 mb-2">
-                <div class="d-none d-sm-block col-auto">
+                <div class="col-auto">
                     <h3>{{ $note->title }}</h3>
                     <h6 class="text-info">{{ Carbon\Carbon::parse($note->updated_at)->diffForHumans() }}</h6>
                 </div>
