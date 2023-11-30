@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $notes = Note::where('user_id', auth()->id())->paginate(8);
+        if ($request->has("searchText") && !is_null($request->searchText)) {
+            $notes = Note::where('user_id', auth()->id())->where('title', 'like','%'.$request->searchText.'%')->paginate(8);
+        }
+        else{
+            $notes = Note::where('user_id', auth()->id())->paginate(8);
+        }
 
         return view("pages.notes.index", [
             "notes" => $notes

@@ -1,5 +1,33 @@
 @extends('layouts.app')
 @section('main-section')
+    <nav class="navbar navbar-expand navbar-light navbar-bg">
+        <a class="sidebar-toggle js-sidebar-toggle">
+            <i class="hamburger align-self-center"></i>
+        </a>
+
+        <div class="navbar-collapse collapse">
+            <ul class="navbar-nav navbar-align">
+                <li class="nav-item">
+                    <a class="nav-icon js-fullscreen d-none d-lg-block" href="#">
+                        <div class="position-relative">
+                            <i class="align-middle" data-feather="maximize"></i>
+                        </div>
+                    </a>
+                </li>
+
+                @auth
+                    <li class="nav-item dropdown">
+                        <a class="nav-icon" href="{{ route('logout') }}">
+                            <div class="position-relative">
+                                <i class="align-middle" data-feather="log-out"></i>
+                            </div>
+                        </a>
+                    </li>
+                @endauth
+            </ul>
+        </div>
+    </nav>
+
     <main class="content">
         <div class="container-fluid p-0">
             <div class="row mb-xl-3 mb-2">
@@ -18,13 +46,13 @@
                         <form id="addNoteForm">
                             <div class="mb-3">
                                 <label class="form-label" for="title">Title</label>
-                                <textarea class="form-control" name="title" id="title" rows="3"></textarea>
+                                <textarea class="form-control" id="title" name="title" rows="3"></textarea>
                                 <small class="text-danger" id="title_error"></small>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label" for="overview">Overview</label>
-                                <textarea class="form-control" name="overview" id="overview" rows="3"></textarea>
+                                <textarea class="form-control" id="overview" name="overview" rows="3"></textarea>
                                 <small class="text-danger" id="overview_error"></small>
                             </div>
 
@@ -96,7 +124,8 @@
                                 .display =
                                 'block';
 
-                            err.response.data.errors.overview == undefined ? overview_error.style.display = 'none' : overview_error.style
+                            err.response.data.errors.overview == undefined ? overview_error.style.display = 'none' : overview_error
+                                .style
                                 .display =
                                 'block';
 

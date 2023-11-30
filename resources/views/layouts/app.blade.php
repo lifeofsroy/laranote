@@ -51,14 +51,13 @@
         </nav>
 
         <div class="main">
-            @include('partials.navbar')
-
             @yield('main-section')
         </div>
     </div>
 
     <script src="{{ asset('assets/user/js/app.js') }}"></script>
     <script src="{{ asset('sw.js') }}"></script>
+
     <script>
         if (!navigator.serviceWorker.controller) {
             navigator.serviceWorker.register('/sw.js')
@@ -67,6 +66,7 @@
                 });
         }
     </script>
+
     <script>
         // notification
         function notify(msz) {
