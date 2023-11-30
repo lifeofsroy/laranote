@@ -25,12 +25,14 @@ class NoteController extends Controller
     {
         $request->validate([
             "title" => ['required'],
+            "overview" => ['required'],
             "description" => ['required'],
         ]);
 
         Note::create([
             'user_id' => $request->user()->id,
             'title' => $request->title,
+            'overview' => $request->overview,
             'description' => $request->description
         ]);
 
@@ -50,6 +52,7 @@ class NoteController extends Controller
     {
         $request->validate([
             "title" => ['required'],
+            "overview" => ['required'],
             "description" => ['required'],
         ]);
 
@@ -58,6 +61,7 @@ class NoteController extends Controller
         $note->update([
             'user_id' => $request->user()->id,
             'title' => $request->title,
+            'overview' => $request->overview,
             'description' => $request->description
         ]);
 

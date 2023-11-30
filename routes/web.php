@@ -29,10 +29,4 @@ Route::prefix('user')->name('user.')->middleware('auth', 'verified')->group(func
     });
 });
 
-Route::get('internet-error', function(){
-    return view('errors.internet');
-})->name('error.internet');
-
-Route::get('note-found', function(){
-    return view('errors.404');
-});
+Route::post('ckeditor/upload', [NoteController::class, 'upload'])->name('upload');

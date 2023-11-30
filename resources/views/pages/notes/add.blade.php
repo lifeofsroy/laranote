@@ -18,15 +18,19 @@
                         <form id="addNoteForm">
                             <div class="mb-3">
                                 <label class="form-label" for="title">Title</label>
-                                <input class="form-control" id="title" name='title' type="text">
-
+                                <textarea class="form-control" name="title" id="title" rows="3"></textarea>
                                 <small class="text-danger" id="title_error"></small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="overview">Overview</label>
+                                <textarea class="form-control" name="overview" id="overview" rows="3"></textarea>
+                                <small class="text-danger" id="overview_error"></small>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label" for="description">Description</label>
                                 <textarea class="form-control" id="description" name="description" rows="10"></textarea>
-
                                 <small class="text-danger" id="description_error"></small>
                             </div>
 
@@ -46,17 +50,15 @@
             let ckdesc = document.querySelector('#description');
             let addNoteForm = document.querySelector('#addNoteForm');
             let title = addNoteForm.querySelector('[name="title"]');
+            let overview = addNoteForm.querySelector('[name="overview"]');
             let description = addNoteForm.querySelector('[name="description"]');
             let title_error = addNoteForm.querySelector('#title_error');
+            let overview_error = addNoteForm.querySelector('#overview_error');
             let description_error = addNoteForm.querySelector('#description_error');
             let desc;
 
             // ckeditor
             ClassicEditor.create(ckdesc)
-                .then(editor => {
-                    desc = editor.getData();
-
-                })
                 .catch(err => {
                     console.log(err);
                 })
@@ -72,11 +74,13 @@
                             'X-CSRF-TOKEN': csrf_token,
                         },
                         title: title.value,
+                        overview: overview.value,
                         description: description.value,
                     })
                     .then((res) => {
                         // console.log(res);
                         title_error.style.display = 'none';
+                        overview_error.style.display = 'none';
                         description_error.style.display = 'none';
 
                         notify(res.data.message);
@@ -91,12 +95,18 @@
                             err.response.data.errors.title == undefined ? title_error.style.display = 'none' : title_error.style
                                 .display =
                                 'block';
+
+                            err.response.data.errors.overview == undefined ? overview_error.style.display = 'none' : overview_error.style
+                                .display =
+                                'block';
+
                             err.response.data.errors.description == undefined ? description_error.style.display = 'none' :
                                 description_error.style
                                 .display =
                                 'block';
 
                             title_error.innerText = err.response.data.errors.title;
+                            overview_error.innerText = err.response.data.errors.overview;
                             description_error.innerText = err.response.data.errors.description;
                         }
                     })

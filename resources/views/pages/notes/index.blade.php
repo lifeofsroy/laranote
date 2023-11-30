@@ -13,53 +13,23 @@
             </div>
 
             <div class="container-fluid p-0">
-                <table class="table" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Title</th>
-                            <th>Activate</th>
-                            <th>Modified</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($notes as $note)
-                            <tr id="noteRow{{ $note->id }}">
-                                <td>
-                                    {{ ($notes->currentpage() - 1) * $notes->perpage() + $loop->index + 1 }}
-                                </td>
-
-                                <td>{{ $note->title }}</td>
-
-                                <td>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" id="flexSwitchCheckChecked" type="checkbox"
-                                            {{ $note->is_active == 1 ? 'checked' : '' }} onchange="changeStatus({{ $note->id }})">
-                                    </div>
-                                </td>
-
-                                <td>
-                                    {{ Carbon\Carbon::parse($note->updated_at)->diffForHumans() }}
-                                </td>
-
-                                <td class="table-action text-center">
-                                    <a class="text-warning mx-2" href="{{ route('user.note.show', $note->id) }}">
-                                        <i class="align-middle" data-feather="eye"></i>
-                                    </a>
-
-                                    <a class="text-info mx-2" href="{{ route('user.note.edit', $note->id) }}">
-                                        <i class="align-middle" data-feather="edit"></i>
-                                    </a>
-
-                                    <a class="text-danger mx-2" onclick="deleteNote({{ $note->id }})">
-                                        <i class="align-middle" data-feather="trash-2"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                @foreach ($notes as $note)
+                    <div class="card" id="noteRow{{ $note->id }}">
+                        <div class="card-header pb-1">
+                            <a href="{{ route('user.note.show', $note->id) }}">
+                                <h4 class="card-title mb-0">{{ $note->title }}</h4>
+                            </a>
+                            <h6 class="text-info">{{ Carbon\Carbon::parse($note->updated_at)->diffForHumans() }}</h6>
+                        </div>
+                        <div class="card-body pt-0">
+                            <p class="card-text">{{$note->overview}}</p>
+                            <div class="mt-2">
+                                <a class="card-link" href="{{ route('user.note.edit', $note->id) }}">Edit</a>
+                                <a class="card-link" onclick="deleteNote({{ $note->id }})">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
 
                 {{ $notes->links() }}
             </div>
