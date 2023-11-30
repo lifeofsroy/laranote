@@ -3,12 +3,14 @@
         <i class="hamburger align-self-center"></i>
     </a>
 
-    <form class="d-none d-sm-inline-block">
+    <form class="d-sm-inline-block">
         <div class="input-group input-group-navbar">
-            <input class="form-control" type="text" aria-label="Search" placeholder="Search…">
-            <button class="btn" type="button">
-                <i class="align-middle" data-feather="search"></i>
-            </button>
+            <form>
+                <input class="form-control" name="searchtext" type="text" aria-label="Search" placeholder="Search…">
+                <button class="btn" type="button">
+                    <i class="align-middle" data-feather="search"></i>
+                </button>
+            </form>
         </div>
     </form>
 
