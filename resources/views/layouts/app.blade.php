@@ -56,6 +56,7 @@
     </div>
 
     <script src="{{ asset('assets/user/js/app.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
     <script src="{{ asset('sw.js') }}"></script>
 
     <script>

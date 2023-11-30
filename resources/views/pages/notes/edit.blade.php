@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="mt-n1 col-auto ms-auto text-end">
-                    <a class="btn btn-primary" type="button" href="{{ route('user.note.all') }}">Back</a>
+                    <a class="btn btn-primary" type="button" href="{{ url()->previous() }}">Back</a>
                 </div>
             </div>
 
@@ -76,10 +76,11 @@
 @endsection
 
 @push('script')
+    <x-ckeditor5 />
+
     <script type="module">
         document.addEventListener('DOMContentLoaded', () => {
             let csrf_token = document.querySelector('[name="csrf_token"]').content;
-            let ckdesc = document.querySelector('#description');
             let editNoteForm = document.querySelector('#editNoteForm');
             let noteid = editNoteForm.querySelector('[name="noteid"]').value;
             let title = editNoteForm.querySelector('[name="title"]');
@@ -87,13 +88,6 @@
             let description = editNoteForm.querySelector('[name="description"]');
             let title_error = editNoteForm.querySelector('#title_error');
             let description_error = editNoteForm.querySelector('#description_error');
-            let desc;
-
-            // ckeditor
-            ClassicEditor.create(ckdesc)
-                .catch(err => {
-                    console.log(err);
-                })
 
             // form submision
             editNoteForm.addEventListener('submit', (e) => {
@@ -118,7 +112,7 @@
                         notify(res.data.message);
 
                         setTimeout(() => {
-                            window.location.replace('{{ route('user.note.all') }}')
+                            window.location.replace('{{ url()->previous() }}')
                         }, 2000);
                     })
                     .catch((err) => {

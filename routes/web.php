@@ -29,4 +29,4 @@ Route::prefix('user')->name('user.')->middleware('auth', 'verified')->group(func
     });
 });
 
-Route::post('ckeditor/upload', [NoteController::class, 'upload'])->name('upload');
+Route::post('user/ckeditor/upload', [NoteController::class, 'upload'])->name('upload');

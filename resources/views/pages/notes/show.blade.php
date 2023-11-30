@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="mt-n1 col-auto ms-auto text-end">
-                    <a class="btn btn-primary" type="button" href="{{ route('user.note.all') }}">Back</a>
+                    <a class="btn btn-primary" type="button" href="{{ url()->previous() }}">Back</a>
                 </div>
             </div>
 
