@@ -72,9 +72,9 @@
 @endsection
 
 @push('script')
-    <x-ckeditor5 />
+    <x-tinymce/>
 
-    <script type="module">
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             let csrf_token = document.querySelector('[name="csrf_token"]').content;
             let addNoteForm = document.querySelector('#addNoteForm');

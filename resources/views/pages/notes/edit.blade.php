@@ -76,7 +76,7 @@
 @endsection
 
 @push('script')
-    <x-ckeditor5 />
+    <x-tinymce />
 
     <script type="module">
         document.addEventListener('DOMContentLoaded', () => {

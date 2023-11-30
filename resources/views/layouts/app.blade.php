@@ -25,9 +25,10 @@
             opacity: 0;
         }
     </style>
+    <script src="https://cdn.tiny.cloud/1/dzqvyjmsaiba40a0vijtidjpk1q82cadxl73m6lse9h8fwr7/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
     @stack('style')
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
@@ -57,6 +58,7 @@
 
     <script src="{{ asset('assets/user/js/app.js') }}"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('sw.js') }}"></script>
 
     <script>
