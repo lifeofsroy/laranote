@@ -57,8 +57,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label" for="description">Description</label>
-                                <textarea class="form-control" id="description" name="description" rows="10"></textarea>
+                                <label class="form-label" for="mydesc">Description</label>
+                                <textarea class="form-control" id="mydesc" name="description" rows="10"></textarea>
                                 <small class="text-danger" id="description_error"></small>
                             </div>
 
@@ -80,7 +80,6 @@
             let addNoteForm = document.querySelector('#addNoteForm');
             let title = addNoteForm.querySelector('[name="title"]');
             let overview = addNoteForm.querySelector('[name="overview"]');
-            let description = addNoteForm.querySelector('[name="description"]');
             let title_error = addNoteForm.querySelector('#title_error');
             let overview_error = addNoteForm.querySelector('#overview_error');
             let description_error = addNoteForm.querySelector('#description_error');
@@ -97,7 +96,7 @@
                         },
                         title: title.value,
                         overview: overview.value,
-                        description: description.value,
+                        description: tinymce.get("mydesc").getContent(),
                     })
                     .then((res) => {
                         // console.log(res);

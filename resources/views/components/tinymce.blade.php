@@ -1,6 +1,6 @@
 <script>
     tinymce.init({
-        selector: '#description',
+        selector: '#mydesc',
         plugins: 'save anchor autolink charmap codesample emoticons image link lists advlist media searchreplace table visualblocks wordcount visualchars searchreplace quickbars preview pagebreak insertdatetime fullscreen',
         toolbar: 'save undo redo preview | blocks fontfamily fontsize | bold italic underline strikethrough | link image media | align lineheight | numlist bullist indent outdent | emoticons charmap searchreplace | removeformat visualchars | table pagebreak insertdatetime codesample advlist fullscreen',
         quickbars_insert_toolbar: 'quicktable image media codesample',

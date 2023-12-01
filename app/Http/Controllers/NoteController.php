@@ -66,14 +66,14 @@ class NoteController extends Controller
 
         $note = Note::where('user_id', auth()->id())->find($id);
 
-        $note->update([
+        $updated = $note->update([
             'user_id' => $request->user()->id,
             'title' => $request->title,
             'overview' => $request->overview,
             'description' => $request->description
         ]);
 
-        return response()->json(['message' => 'Note Updated Successfully']);
+        return response()->json(['message' => 'Note Updated Successfully', 'updated' => $updated]);
     }
 
     public function delete($id)

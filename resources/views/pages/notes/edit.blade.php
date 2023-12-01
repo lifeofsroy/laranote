@@ -48,20 +48,24 @@
 
                             <div class="mb-3">
                                 <label class="form-label" for="title">Title</label>
-                                <textarea class="form-control" id="title" name='title' rows="3">{{ old('title', $note->title) }}</textarea>
+                                <textarea class="form-control" id="title" name='title' rows="3">
+                                    {{ $note->title }}
+                                </textarea>
                                 <small class="text-danger" id="title_error"></small>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label" for="overview">Overview</label>
-                                <textarea class="form-control" id="overview" name='overview' rows="3">{{ old('overview', $note->overview) }}</textarea>
+                                <textarea class="form-control" id="overview" name='overview' rows="3">
+                                    {{ $note->overview }}
+                                </textarea>
                                 <small class="text-danger" id="overview_error"></small>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label" for="description">Description</label>
-                                <textarea class="form-control" id="description" name="description" rows="10">
-                                    {{ old('title', $note->description) }}
+                                <label class="form-label" for="mydesc">Description</label>
+                                <textarea class="form-control" id="mydesc" name="description" rows="10">
+                                    {{ $note->description }}
                                 </textarea>
                                 <small class="text-danger" id="description_error"></small>
                             </div>
@@ -79,65 +83,66 @@
     <x-tinymce />
 
     <script type="module">
-        document.addEventListener('DOMContentLoaded', () => {
-            let csrf_token = document.querySelector('[name="csrf_token"]').content;
-            let editNoteForm = document.querySelector('#editNoteForm');
-            let noteid = editNoteForm.querySelector('[name="noteid"]').value;
-            let title = editNoteForm.querySelector('[name="title"]');
-            let overview = editNoteForm.querySelector('[name="overview"]');
-            let description = editNoteForm.querySelector('[name="description"]');
-            let title_error = editNoteForm.querySelector('#title_error');
-            let description_error = editNoteForm.querySelector('#description_error');
+        let csrf_token = document.querySelector('[name="csrf_token"]').content;
+        let editNoteForm = document.querySelector('#editNoteForm');
+        let noteid = editNoteForm.querySelector('[name="noteid"]').value;
+        let title = editNoteForm.querySelector('[name="title"]');
+        let overview = editNoteForm.querySelector('[name="overview"]');
+        let title_error = editNoteForm.querySelector('#title_error');
+        let overview_error = editNoteForm.querySelector('#overview_error');
+        let description_error = editNoteForm.querySelector('#description_error');
 
-            // form submision
-            editNoteForm.addEventListener('submit', (e) => {
-                e.preventDefault();
+        // form submision
+        editNoteForm.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-                axios.post(`/user/note/update/${noteid}`, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'X-CSRF-TOKEN': csrf_token,
-                        },
-                        title: title.value,
-                        overview: overview.value,
-                        description: description.value,
-                    })
-                    .then((res) => {
-                        // console.log(res);
-                        title_error.style.display = 'none';
-                        overview_error.style.display = 'none';
-                        description_error.style.display = 'none';
+            axios.post(`/user/note/update/${noteid}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': csrf_token,
+                    },
+                    title: title.value,
+                    overview: overview.value,
+                    description: tinymce.get("mydesc").getContent(),
+                })
+                .then((res) => {
+                    // console.log(res);
+                    title_error.style.display = 'none';
+                    overview_error.style.display = 'none';
+                    description_error.style.display = 'none';
 
+                    if (res.data.updated) {
                         notify(res.data.message);
 
                         setTimeout(() => {
                             window.location.replace('{{ url()->previous() }}')
                         }, 2000);
-                    })
-                    .catch((err) => {
-                        // console.log(err);
-                        if (err.response.data.errors) {
-                            err.response.data.errors.title == undefined ? title_error.style.display = 'none' : title_error.style
-                                .display =
-                                'block';
+                    }
 
-                            err.response.data.errors.overview == undefined ? overview_error.style.display = 'none' : overview_error
-                                .style
-                                .display =
-                                'block';
+                })
+                .catch((err) => {
+                    // console.log(err);
+                    if (err.response.data.errors) {
+                        err.response.data.errors.title == undefined ? title_error.style.display = 'none' : title_error.style
+                            .display =
+                            'block';
 
-                            err.response.data.errors.description == undefined ? description_error.style.display = 'none' :
-                                description_error.style
-                                .display =
-                                'block';
+                        err.response.data.errors.overview == undefined ? overview_error.style.display = 'none' : overview_error
+                            .style
+                            .display =
+                            'block';
 
-                            title_error.innerText = err.response.data.errors.title;
-                            overview_error.innerText = err.response.data.errors.overview;
-                            description_error.innerText = err.response.data.errors.description;
-                        }
-                    })
-            })
+                        err.response.data.errors.description == undefined ? description_error.style.display = 'none' :
+                            description_error.style
+                            .display =
+                            'block';
+
+                        title_error.innerText = err.response.data.errors.title;
+                        overview_error.innerText = err.response.data.errors.overview;
+                        description_error.innerText = err.response.data.errors.description;
+                    }
+                })
         })
     </script>
 @endpush
