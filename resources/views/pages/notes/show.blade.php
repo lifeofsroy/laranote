@@ -37,6 +37,7 @@
                 </div>
 
                 <div class="mt-n1 col-auto ms-auto text-end">
+                    <a class="btn btn-info" type="button" href="{{route('user.note.edit', $note->id)}}">Edit</a>
                     <a class="btn btn-primary" type="button" href="{{ url()->previous() }}">Back</a>
                 </div>
             </div>
