@@ -48,25 +48,19 @@
 
                             <div class="mb-3">
                                 <label class="form-label" for="title">Title</label>
-                                <textarea class="form-control" id="title" name='title' rows="3">
-                                    {{ $note->title }}
-                                </textarea>
+                                <textarea class="form-control" id="title" name='title' rows="3">{{ $note->title }}</textarea>
                                 <small class="text-danger" id="title_error"></small>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label" for="overview">Overview</label>
-                                <textarea class="form-control" id="overview" name='overview' rows="3">
-                                    {{ $note->overview }}
-                                </textarea>
+                                <textarea class="form-control" id="overview" name='overview' rows="3">{{ $note->overview }}</textarea>
                                 <small class="text-danger" id="overview_error"></small>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label" for="mydesc">Description</label>
-                                <textarea class="form-control" id="mydesc" name="description" rows="10">
-                                    {{ $note->description }}
-                                </textarea>
+                                <textarea class="form-control" id="mydesc" name="description" rows="10">{{ $note->description }}</textarea>
                                 <small class="text-danger" id="description_error"></small>
                             </div>
 
